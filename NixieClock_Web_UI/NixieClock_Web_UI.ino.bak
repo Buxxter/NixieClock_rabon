@@ -1695,22 +1695,6 @@ void ntpStartSettings(void) {
 }
 
 void setup() {
-  
-  Serial.begin(115200);
-  Serial.println F("");
-  Serial.println F("Startup...");
-  Serial.print F("Firmware version ");
-  Serial.print F(ESP_FIRMWARE_VERSION);
-  Serial.println F("...");
-
-  // Задержка запуска
-  #ifdef STARTUP_DELAY
-    Serial.print F("Startup delay ");
-    Serial.println (STARTUP_DELAY);
-    delay(STARTUP_DELAY);
-    
-  #endif
-    
   //инициализация индикатора
 #if STATUS_LED > 0
   pinMode(LED_BUILTIN, OUTPUT);
@@ -1726,6 +1710,12 @@ void setup() {
   pinMode(TWI_SCL_PIN, INPUT_PULLUP);
   twi_init();
 
+  Serial.begin(115200);
+  Serial.println F("");
+  Serial.println F("Startup...");
+  Serial.print F("Firmware version ");
+  Serial.print F(ESP_FIRMWARE_VERSION);
+  Serial.println F("...");
 
   //инициализация файловой системы
   if (!LittleFS.begin()) Serial.println F("File system error");
